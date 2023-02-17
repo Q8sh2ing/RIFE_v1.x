@@ -151,8 +151,8 @@ if args.UHD:
     ph = ((h - 1) // 64 + 1) * 64
     pw = ((w - 1) // 64 + 1) * 64
 else:
-    ph = ((h - 1) // 64 + 1) * 64
-    pw = ((w - 1) // 64 + 1) * 64
+    ph = ((h - 1) // 32 + 1) * 32
+    pw = ((w - 1) // 32 + 1) * 32
 padding = (0, pw - w, 0, ph - h)
 pbar = tqdm(total=tot_frame)
 skip_frame = 1
