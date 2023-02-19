@@ -172,15 +172,15 @@ while True:
     I0 = I1
     I1 = torch.from_numpy(np.transpose(frame, (2,0,1))).to(device, non_blocking=True).unsqueeze(0).float() / 255.
     I1 = F.pad(I1, padding)
-    diff = (F.interpolate(I0, (16, 16), mode='bilinear', align_corners=False)
-         - F.interpolate(I1, (16, 16), mode='bilinear', align_corners=False)).abs()
+    diff = (F.interpolate(I0, (32, 32), mode='bilinear', align_corners=False)
+         - F.interpolate(I1, (32, 32), mode='bilinear', align_corners=False)).abs()
     if diff.max() < 2e-3 and args.skip:
         if skip_frame % 100 == 0:
             print("Warning: Your video has {} static frames, skipping them may change the duration of the generated video.".format(skip_frame))
         skip_frame += 1
         pbar.update(1)
         continue
-    if diff.mean() > 0.15:
+    if diff.mean() > 0.5:
         output = []
         step = 1 / (2 ** args.exp)
         alpha = 0
