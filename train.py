@@ -40,7 +40,8 @@ def train(model, local_rank):
         writer, writer_val = None, None
     step = 0
     nr_eval = 0
-    dataset = VimeoDataset('train')
+    data_folder = '/content/drive/MyDrive/Training/train/'
+    dataset = VimeoDataset(data_folder)
     sampler = DistributedSampler(dataset)
     train_data = DataLoader(dataset, batch_size=args.batch_size, num_workers=8, pin_memory=True, drop_last=True, sampler=sampler)
     args.step_per_epoch = train_data.__len__()
